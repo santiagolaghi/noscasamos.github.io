@@ -37,11 +37,14 @@ video {
 
 #timer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  max-width: 800px;
 }
 
 #timer div {
-  margin: 0 10px;
+  margin: 10px;
+  text-align: center;
 }
 
 #timer span {
@@ -53,3 +56,4 @@ h1 {
   font-size: 3em;
   margin-bottom: 20px;
 }
+
