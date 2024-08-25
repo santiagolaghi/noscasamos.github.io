@@ -1,60 +1,40 @@
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-  background: black;
-  position: relative;
-}
+// Define the target date
+const targetDate = new Date("April 5, 2025 00:00:00").getTime();
 
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
+// Update the countdown every 10 milliseconds
+const countdownInterval = setInterval(function() {
+  // Get the current date and time
+  const now = new Date().getTime();
 
-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  // Calculate the remaining time
+  const distance = targetDate - now;
 
-.countdown {
-  text-align: center;
-  color: white;
-  position: relative;
-  z-index: 1;
-}
+  // Calculate years, months, weeks, days, hours, minutes, seconds, and milliseconds remaining
+  const years = Math.floor(distance / (1000 * 60 * 60 * 24 * 365));
+  const months = Math.floor((distance % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+  const weeks = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24 * 7));
+  const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  const milliseconds = Math.floor((distance % 1000) / 10); // Reducing to two digits
 
-#timer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 800px;
-}
+  // Display the countdown
+  document.getElementById("years").innerText = years;
+  document.getElementById("months").innerText = months;
+  document.getElementById("weeks").innerText = weeks;
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+  document.getElementById("milliseconds").innerText = milliseconds;
 
-#timer div {
-  margin: 10px;
-  text-align: center;
-}
+  // If the countdown is finished, display a message
+  if (distance < 0) {
+    clearInterval(countdownInterval);
+    document.getElementById("timer").innerHTML = "<h2>¡Ha llegado el día!</h2>";
+  }
+}, 10);
 
-#timer span {
-  font-size: 2em;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: 3em;
-  margin-bottom: 20px;
-}
 
 
